@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>百度关键字搜索</title>
+</head>
+
+<link rel="stylesheet" href="css/global.css">
+<link rel="stylesheet" href="css/main.css">
+<body>
+
+<div class="head">
+  <img src="img/logo_white.png" alt="">
+</div>
+<div class="search">
+ <input class="serinput" type="text" id="serinput">
+ <button class="serbtn">百度一下</button>
+ <div class="gj_input" id="gj_input">
+		<ul id="gj_ul"></ul>
+ </div>
+
+
+</div>
+
+	
+</body>
+
+
+
+<script>
+var serinput = document.getElementById("serinput")
+serinput.onkeyup = getName;
+var gj_input = document.getElementById("gj_input");
+
+ document.onclick=function(){
+ 	console.log(gj_input.style.display)
+ 	if(gj_input.style.display ==""){
+ 		gj_input.style.display = "none";
+ 	}else{
+ 		gj_input.style.display = "";
+ 	}
+ 	
+ }
+
+
+function getName(event) {
+	console.log(event)
+	event.stopPropagation();
+	var word = serinput.value;
+	var script = document.createElement("script");
+	 script.src = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+word+"&cb=ed"
+   document.getElementsByTagName("html")[0].appendChild(script);
+}
+
+function ed(json){
+	var data = json.s;
+	console.log(data);
+	var str = "";
+	data.forEach(function(item){
+		str += "<li><a href=https://www.baidu.com/s?wd="+item+ ">"+item+"</a></li>"
+
+	}) 
+
+var ul =document.getElementById('gj_ul');
+    ul.innerHTML=str;
+}
+</script>
+</html>
